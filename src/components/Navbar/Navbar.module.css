@@ -11,9 +11,12 @@
 .item a {
     color: white;
     text-decoration: none;
+    transition: 0.2s ease all;
 }
 
-.item.active a {
+.item .activeLink {
     color: sandybrown;
+    transition: 0.2s ease all;
+    font-weight: bold;
 }
 
