@@ -16,6 +16,8 @@ type AppPropsType = {
     postData: postDataType
     dialogsData: DialogsDataType
     messages: MessagesType
+    newPostText: string
+    updateNewPostText: (newText: string) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -27,7 +29,9 @@ const App = (props: AppPropsType) => {
                     <Route path={'/dialogs'} render={ () => <Dialogs dialogsData = {props.dialogsData}
                                                                      messages = {props.messages}/> }/>
                     <Route path={'/profile'} render={ () => <Profile postData={props.postData}
-                                                                     addPostCallback={addPost}/> }/>
+                                                                     addPostCallback={addPost}
+                                                                     newPostText={props.newPostText}
+                                                                     updateNewPostText={props.updateNewPostText}/> }/>
                     <Route path={'/news'} render={ () => <News /> }/>
                     <Route path={'/music'} render={ () => <Music /> }/>
                     <Route path={'/settings'} render={ () => <Settings /> }/>
