@@ -31,7 +31,6 @@ export type RootStateType = {
     dialogsPage: dialogsPageType
 }
 
-
 let state: RootStateType = {
     profilePage: {
         postData: [
@@ -61,7 +60,6 @@ let state: RootStateType = {
         ]
     },
 }
-
 
 export const addPost = () => {
     const newPost: PostType = {

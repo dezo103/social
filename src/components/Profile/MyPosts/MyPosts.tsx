@@ -10,7 +10,6 @@ type MyPostsPropsType =  {
     updateNewPostText: (newText: string) => void
 }
 
-
 const MyPosts = (props: MyPostsPropsType) => {
 
     let postsElements = props.postData.map( p => <Post message={p.message} likesCount={p.likesCount}/>)

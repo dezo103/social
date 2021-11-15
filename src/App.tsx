@@ -11,7 +11,6 @@ import Settings from "./components/Settings/Settings";
 import {DialogsDataType, MessagesType, postDataType} from "./redux/state";
 import {addPost} from "./redux/state";
 
-
 type AppPropsType = {
     postData: postDataType
     dialogsData: DialogsDataType

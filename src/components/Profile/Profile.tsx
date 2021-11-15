@@ -3,7 +3,6 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {postDataType} from "../../redux/state";
 
-
 type ProfilePostType = {
     postData: postDataType
     addPostCallback: () => void
