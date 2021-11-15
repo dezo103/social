@@ -1,4 +1,3 @@
-// import {rerenderEntireTree} from "../render";
 let onChange = () => {
     console.log('hello')
 }

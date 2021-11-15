@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
-import state from './redux/state' //changed
+import state from './redux/state'
 
-// export const rerenderEntireTree = (state: RootStateType) => {
 export const rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
