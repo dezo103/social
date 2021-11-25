@@ -1,7 +1,6 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-// import state from './redux/state'
 import {rerenderEntireTree} from "./render";
 import {subscribe} from "./redux/state";
 
