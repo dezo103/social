@@ -9,7 +9,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {DialogsDataType, MessagesType, postDataType} from "./redux/state";
-import {addPost} from "./redux/state";
+// import {addPost} from "./redux/state";
 
 type AppPropsType = {
     postData: postDataType
@@ -17,6 +17,7 @@ type AppPropsType = {
     messages: MessagesType
     newPostText: string
     updateNewPostText: (newText: string) => void
+    addPost: () => void
 }
 
 const App = (props: AppPropsType) => {
@@ -28,7 +29,7 @@ const App = (props: AppPropsType) => {
                     <Route path={'/dialogs'} render={ () => <Dialogs dialogsData = {props.dialogsData}
                                                                      messages = {props.messages}/> }/>
                     <Route path={'/profile'} render={ () => <Profile postData={props.postData}
-                                                                     addPostCallback={addPost}
+                                                                     addPostCallback={props.addPost}
                                                                      newPostText={props.newPostText}
                                                                      updateNewPostText={props.updateNewPostText}/> }/>
                     <Route path={'/news'} render={ () => <News /> }/>

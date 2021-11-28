@@ -1,10 +1,8 @@
-let onChange = () => {
-    console.log('hello')
-}
 
-export const subscribe = (callback: () => void) => {
-    onChange = callback
-}
+
+// let onChange = () => {
+//     console.log('hello')
+// }
 
 export type PostType = {
     id:number
@@ -26,18 +24,26 @@ export type MessageType = {
     message: string
 }
 export type MessagesType = Array<MessageType>
-type dialogsPageType = {
+export type dialogsPageType = {
     dialogsData: DialogsDataType
     messages: MessagesType
 }
 export type addPostType = () => void
-
 export type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
 }
+export type StoreType = {
+    _state: RootStateType
+    updateNewPostText: (newText: string) => void
+    addPost: () => void
+    _onChange: () => void
+    subscribe: (callback: () => void) => void
+    getState: () => RootStateType
+}
 
-let state: RootStateType = {
+const store: StoreType = {
+    _state: {
     profilePage: {
         postData: [
             {id: 1, message: "Hi", likesCount: 12},
@@ -65,24 +71,30 @@ let state: RootStateType = {
             {id: 5, message: "Yo"}
         ]
     },
-}
-
-export const addPost = () => {
-    const newPost: PostType = {
-        id: new Date().getTime(),
-        message: state.profilePage.newPostText,
-        likesCount: 0
+},
+    updateNewPostText(newText: string) {
+        this._state.profilePage.newPostText = newText
+        this._onChange()
+    },
+    addPost() {
+        const newPost: PostType = {
+            id: new Date().getTime(),
+            message: this._state.profilePage.newPostText,
+            likesCount: 0
+        }
+        this._state.profilePage.postData.push(newPost)
+        this._state.profilePage.newPostText = ""
+        this._onChange()
+    },
+    _onChange() {
+        console.log('state changed')
+    },
+    subscribe(callback) {
+        this._onChange = callback
+    },
+    getState() {
+        return this._state
     }
-    state.profilePage.postData.push(newPost)
-    state.profilePage.newPostText = ""
-    //rerenderEntireTree(state)
-    onChange()
 }
 
-export const updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText
-    //rerenderEntireTree(state)
-    onChange()
-}
-
-export default state
+export default store
