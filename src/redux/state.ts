@@ -1,9 +1,3 @@
-
-
-// let onChange = () => {
-//     console.log('hello')
-// }
-
 export type PostType = {
     id:number
     message: string

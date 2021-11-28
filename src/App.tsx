@@ -8,30 +8,25 @@ import {Route} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {DialogsDataType, MessagesType, postDataType} from "./redux/state";
-// import {addPost} from "./redux/state";
+import {DialogsDataType, MessagesType, postDataType, StoreType} from "./redux/state";
 
 type AppPropsType = {
-    postData: postDataType
-    dialogsData: DialogsDataType
-    messages: MessagesType
-    newPostText: string
-    updateNewPostText: (newText: string) => void
-    addPost: () => void
+    store: StoreType
 }
 
 const App = (props: AppPropsType) => {
+    const state = props.store.getState();
     return (
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path={'/dialogs'} render={ () => <Dialogs dialogsData = {props.dialogsData}
-                                                                     messages = {props.messages}/> }/>
-                    <Route path={'/profile'} render={ () => <Profile postData={props.postData}
-                                                                     addPostCallback={props.addPost}
-                                                                     newPostText={props.newPostText}
-                                                                     updateNewPostText={props.updateNewPostText}/> }/>
+                    <Route path={'/dialogs'} render={ () => <Dialogs dialogsData = {state.dialogsPage.dialogsData}
+                                                                     messages = {state.dialogsPage.messages}/> }/>
+                    <Route path={'/profile'} render={ () => <Profile postData={state.profilePage.postData}
+                                                                     addPostCallback={props.store.addPost.bind(props.store)}
+                                                                     newPostText={state.profilePage.newPostText}
+                                                                     updateNewPostText={props.store.updateNewPostText.bind(props.store)}/> }/>
                     <Route path={'/news'} render={ () => <News /> }/>
                     <Route path={'/music'} render={ () => <Music /> }/>
                     <Route path={'/settings'} render={ () => <Settings /> }/>

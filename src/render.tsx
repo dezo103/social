@@ -9,13 +9,7 @@ export const rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App postData={store.getState().profilePage.postData}
-                     dialogsData={store.getState().dialogsPage.dialogsData}
-                     messages={store.getState().dialogsPage.messages}
-                     newPostText={store.getState().profilePage.newPostText}
-                     updateNewPostText={store.updateNewPostText.bind(store)}
-                     addPost={store.addPost.bind(store)}
-                    />
+                <App store={store} />
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
