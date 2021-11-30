@@ -1,4 +1,3 @@
-// import {RootStateType, updateNewPostText} from "./redux/state";
 import ReactDOM from "react-dom";
 import React from "react";
 import {BrowserRouter} from "react-router-dom";

@@ -22,15 +22,12 @@ export type dialogsPageType = {
     dialogsData: DialogsDataType
     messages: MessagesType
 }
-export type addPostType = () => void
 export type RootStateType = {
     profilePage: profilePageType
     dialogsPage: dialogsPageType
 }
 export type StoreType = {
     _state: RootStateType
-    //updateNewPostText: (newText: string) => void
-    //addPost: () => void
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => RootStateType
@@ -86,21 +83,6 @@ const store: StoreType = {
     getState() {
         return this._state
     },
-
-    // updateNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText
-    //     this._onChange()
-    // },
-    // addPost() {
-    //     const newPost: PostType = {
-    //         id: new Date().getTime(),
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0
-    //     }
-    //     this._state.profilePage.postData.push(newPost)
-    //     this._state.profilePage.newPostText = ""
-    //     this._onChange()
-    // },
 
     dispatch(action) {
         if (action.type === 'UPDATE-NEW-POST-TEXT') {
