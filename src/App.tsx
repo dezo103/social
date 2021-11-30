@@ -17,21 +17,24 @@ type AppPropsType = {
 const App = (props: AppPropsType) => {
     const state = props.store.getState();
     return (
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className="app-wrapper-content">
-                    <Route path={'/dialogs'} render={ () => <Dialogs dialogsData = {state.dialogsPage.dialogsData}
-                                                                     messages = {state.dialogsPage.messages}/> }/>
-                    <Route path={'/profile'} render={ () => <Profile postData={state.profilePage.postData}
-                                                                     addPostCallback={props.store.addPost.bind(props.store)}
-                                                                     newPostText={state.profilePage.newPostText}
-                                                                     updateNewPostText={props.store.updateNewPostText.bind(props.store)}/> }/>
-                    <Route path={'/news'} render={ () => <News /> }/>
-                    <Route path={'/music'} render={ () => <Music /> }/>
-                    <Route path={'/settings'} render={ () => <Settings /> }/>
-                </div>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className="app-wrapper-content">
+                <Route path={'/dialogs'} render={() => <Dialogs dialogsData={state.dialogsPage.dialogsData}
+                                                                messages={state.dialogsPage.messages}/>}/>
+                <Route path={'/profile'} render={() => <Profile postData={state.profilePage.postData}
+                                                                dispatch={props.store.dispatch.bind(props.store)}
+                    //addPostCallback={props.store.addPost.bind(props.store)}
+                                                                //updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                                                                newPostText={state.profilePage.newPostText}
+                                                                />
+                }/>
+                <Route path={'/news'} render={() => <News/>}/>
+                <Route path={'/music'} render={() => <Music/>}/>
+                <Route path={'/settings'} render={() => <Settings/>}/>
             </div>
+        </div>
     )
 };
 
