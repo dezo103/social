@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
 
 export type PostType = {
     id:number
@@ -22,6 +27,7 @@ export type MessagesType = Array<MessageType>
 export type dialogsPageType = {
     dialogsData: DialogsDataType
     messages: MessagesType
+    newMessageBody: string
 }
 export type RootStateType = {
     profilePage: profilePageType
@@ -32,20 +38,34 @@ export type StoreType = {
     _onChange: () => void
     subscribe: (callback: () => void) => void
     getState: () => RootStateType
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType) => void
+    dispatch: (action:ActionsTypes) => void
 }
 
 type AddPostActionType = ReturnType<typeof addPostAC>
 type UpdateNewPostTextActionType = ReturnType<typeof updateNewPosTextAC>
+type SendMessageActionType = ReturnType<typeof sendMessageAC>
+type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+export type ActionsTypes =
+    AddPostActionType |
+    UpdateNewPostTextActionType |
+    SendMessageActionType |
+    UpdateNewMessageBodyActionType
 
-export const addPostAC  = () => ({type: 'ADD-POST'}as const)
+export const addPostAC  = () => ({type: ADD_POST}as const)
 export const updateNewPosTextAC = (newText: string) => {
-    return ({
-            type: 'UPDATE-NEW-POST-TEXT',
+    return {
+            type: UPDATE_NEW_POST_TEXT,
             newText: newText
-    }as const)
+    } as const
+}
+
+export const sendMessageAC  = () => ({type: SEND_MESSAGE}as const)
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body: body
+    } as const
 }
 
 const store: StoreType = {
@@ -75,8 +95,9 @@ const store: StoreType = {
             {id: 3, message: "Yo"},
             {id: 4, message: "Yo"},
             {id: 5, message: "Yo"}
-        ]
-    },
+        ],
+        newMessageBody: ''
+    }
 },
     _onChange() {
         console.log('state changed')
@@ -89,11 +110,11 @@ const store: StoreType = {
         return this._state
     },
 
-    dispatch(action) {
-        if (action.type === 'UPDATE-NEW-POST-TEXT') {
+    dispatch(action: ActionsTypes) {
+        if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._onChange()
-        } else if (action.type === 'ADD-POST') {
+        } else if (action.type === ADD_POST) {
             const newPost: PostType = {
                 id: new Date().getTime(),
                 message: this._state.profilePage.newPostText,
@@ -101,6 +122,17 @@ const store: StoreType = {
             }
             this._state.profilePage.postData.push(newPost)
             this._state.profilePage.newPostText = ""
+            this._onChange()
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._onChange()
+        } else if (action.type === SEND_MESSAGE) {
+            const newMessage: MessageType = {
+                id: 6,
+                message: this._state.dialogsPage.newMessageBody
+            }
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageBody = ""
             this._onChange()
         }
     }
