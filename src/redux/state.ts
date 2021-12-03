@@ -1,8 +1,5 @@
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
-const SEND_MESSAGE = 'SEND-MESSAGE'
-
+import dialogsReducer, {SendMessageActionType, UpdateNewMessageBodyActionType} from "./dialogs-reducer";
+import profileReducer, {AddPostActionType, UpdateNewPostTextActionType} from "./profile-reducer";
 
 export type PostType = {
     id:number
@@ -41,41 +38,17 @@ export type StoreType = {
     dispatch: (action:ActionsTypes) => void
 }
 
-type AddPostActionType = ReturnType<typeof addPostAC>
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPosTextAC>
-type SendMessageActionType = ReturnType<typeof sendMessageAC>
-type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
-
 export type ActionsTypes =
     AddPostActionType |
     UpdateNewPostTextActionType |
     SendMessageActionType |
     UpdateNewMessageBodyActionType
 
-export const addPostAC  = () => ({type: ADD_POST}as const)
-export const updateNewPosTextAC = (newText: string) => {
-    return {
-            type: UPDATE_NEW_POST_TEXT,
-            newText: newText
-    } as const
-}
-
-export const sendMessageAC  = () => ({type: SEND_MESSAGE}as const)
-export const updateNewMessageBodyAC = (body: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
-    } as const
-}
-
 const store: StoreType = {
     _state: {
     profilePage: {
         postData: [
-            {id: 1, message: "Hi", likesCount: 12},
-            {id: 2, message: "hello? how are you&", likesCount: 12},
-            {id: 3, message: "goodbye? my friend", likesCount: 12},
-            {id: 4, message: "I am good", likesCount: 12},
+            {id: 1, message: "Hi hi hi", likesCount: 12},
             {id: 5, message: "cryptocurency - is the best investment", likesCount: 12},
         ],
         newPostText: ''
@@ -92,9 +65,7 @@ const store: StoreType = {
         messages: [
             {id: 1, message: "Hi"},
             {id: 2, message: "How are you"},
-            {id: 3, message: "Yo"},
-            {id: 4, message: "Yo"},
-            {id: 5, message: "Yo"}
+            {id: 3, message: "Yo"}
         ],
         newMessageBody: ''
     }
@@ -111,30 +82,9 @@ const store: StoreType = {
     },
 
     dispatch(action: ActionsTypes) {
-        if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText
-            this._onChange()
-        } else if (action.type === ADD_POST) {
-            const newPost: PostType = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.postData.push(newPost)
-            this._state.profilePage.newPostText = ""
-            this._onChange()
-        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
-            this._state.dialogsPage.newMessageBody = action.body
-            this._onChange()
-        } else if (action.type === SEND_MESSAGE) {
-            const newMessage: MessageType = {
-                id: 6,
-                message: this._state.dialogsPage.newMessageBody
-            }
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newMessageBody = ""
-            this._onChange()
-        }
+        dialogsReducer(this._state.dialogsPage, action)
+        profileReducer(this._state.profilePage, action)
+        this._onChange()
     }
 }
 
