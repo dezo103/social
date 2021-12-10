@@ -14,7 +14,7 @@ type AppPropsType = {
     store: StoreType
 }
 
-const App = (props: AppPropsType) => {
+const App: React.FC<AppPropsType> = (props: AppPropsType) => {
     const state = props.store.getState();
     return (
         <div className='app-wrapper'>

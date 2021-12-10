@@ -16,7 +16,8 @@ const MyPosts = (props: MyPostsPropsType) => {
     let postsElements = props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     let addPost = () => {
-        props.dispatch(addPostAC())
+        //props.dispatch(addPostAC())
+        props.dispatch(addPostAC(props.newPostText))
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

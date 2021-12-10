@@ -5,9 +5,8 @@ import {rerenderEntireTree} from "./render";
 import store from "./redux/state";
 
 
-rerenderEntireTree()
 store.subscribe(rerenderEntireTree)
-
+rerenderEntireTree()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
