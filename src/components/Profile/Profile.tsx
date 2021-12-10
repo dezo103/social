@@ -2,7 +2,6 @@ import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ActionsTypes, postDataType} from "../../redux/store";
-import store from "../../redux/redux-store";
 
 type ProfilePostType = {
     postData: postDataType
