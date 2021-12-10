@@ -8,10 +8,12 @@ import {Route} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {StoreType} from "./redux/state";
+//import {StoreType} from "./redux/store";
+import {RootStateType} from "./redux/redux-store";
 
 type AppPropsType = {
-    store: StoreType
+    //store: StoreType
+    store: RootStateType
 }
 
 const App: React.FC<AppPropsType> = (props: AppPropsType) => {

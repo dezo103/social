@@ -7,7 +7,7 @@ import {
     ActionsTypes,
     DialogsDataType,
     MessagesType,
-} from "../../redux/state";
+} from "../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {
@@ -30,7 +30,6 @@ const Dialogs = (props: DialogsPropsType) => {
     let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
         props.dispatch(updateNewMessageBodyAC(e.currentTarget.value))
     }
-
 
     return (
         <div className={s.dialogs}>
