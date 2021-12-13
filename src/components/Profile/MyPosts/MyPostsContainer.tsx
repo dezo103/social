@@ -1,5 +1,4 @@
-import React, {ChangeEvent} from 'react';
-import {StoreType} from "../../../redux/store";
+import React from 'react';
 import MyPosts from "./MyPosts";
 import {addPostAC, updateNewPosTextAC} from "../../../redux/profile-reducer";
 import {RootStateType} from "../../../redux/redux-store";
@@ -12,7 +11,6 @@ type MyPostsContainer = {
 export const MyPostsContainer = (props: MyPostsContainer) => {
     const state = props.store.getState()
     let addPost = (newPostText: string) => {
-        //props.dispatch(addPostAC())
         props.store.dispatch(addPostAC(newPostText))
     }
 

@@ -3,6 +3,7 @@ import React from "react";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import store from './redux/redux-store'
+import {Provider} from "react-redux";
 
 
 export const rerenderEntireTree = () => {
@@ -10,7 +11,9 @@ export const rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App store={store} />
+                <Provider store={store}>
+                    <App />
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')

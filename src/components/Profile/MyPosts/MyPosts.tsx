@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {ActionsTypes, postDataType} from "../../../redux/store";
-import {addPostAC, updateNewPosTextAC} from "../../../redux/profile-reducer";
+import {postDataType} from "../../../redux/store";
+
 
 type MyPostsPropsType = {
     addPost: (newPostText: string) => void
@@ -45,4 +45,3 @@ const MyPosts = (props: MyPostsPropsType) => {
 
 export default MyPosts;
 
-//e: ChangeEvent<HTMLTextAreaElement>
