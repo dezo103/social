@@ -5,24 +5,23 @@ import {ActionsTypes, postDataType} from "../../../redux/store";
 import {addPostAC, updateNewPosTextAC} from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
+    addPost: (newPostText: string) => void
+    updateNewPostText: (text: string) => void
     postData: postDataType
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
 }
 
-
 const MyPosts = (props: MyPostsPropsType) => {
-
     let postsElements = props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-    let addPost = () => {
-        //props.dispatch(addPostAC())
-        props.dispatch(addPostAC(props.newPostText))
-    }
+   const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.currentTarget.value
+        props.updateNewPostText(text)
+   }
 
-    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewPosTextAC(e.currentTarget.value))
-    }
+   const addPost = () => {
+       props.addPost(props.newPostText)
+   }
 
     return (
         <div className={s.postsBlock}>
@@ -45,3 +44,5 @@ const MyPosts = (props: MyPostsPropsType) => {
 }
 
 export default MyPosts;
+
+//e: ChangeEvent<HTMLTextAreaElement>

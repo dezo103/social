@@ -9,12 +9,14 @@ import {
     MessagesType,
 } from "../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {RootStateType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
     dialogsData: DialogsDataType
     messages: MessagesType
     newMessageBody: string
     dispatch: (action: ActionsTypes) => void
+    store: RootStateType
 }
 
 const Dialogs = (props: DialogsPropsType) => {

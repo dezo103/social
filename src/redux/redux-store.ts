@@ -18,4 +18,4 @@ export default store
 //@ts-ignore
 window.store=store
 
-console.log(store.getState())
+// console.log(store.getState())
