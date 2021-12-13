@@ -5,32 +5,47 @@ import Message from "./Message/Message";
 
 import {
     ActionsTypes,
-    DialogsDataType,
+    DialogsDataType, dialogsPageType,
     MessagesType,
 } from "../../redux/store";
 import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 import {RootStateType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
-    dialogsData: DialogsDataType
-    messages: MessagesType
-    newMessageBody: string
-    dispatch: (action: ActionsTypes) => void
-    store: RootStateType
+    // dialogsData: DialogsDataType
+    // messages: MessagesType
+    // newMessageBody: string
+    //dispatch: (action: ActionsTypes) => void
+    // store: RootStateType
+    updateNewMessageBody: (text: string) => void
+    dialogsPage: dialogsPageType
+    sendMessage: (newMessageBody: string) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
 
-    let dialogsElements = props.dialogsData.map( d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = props.messages.map(m => <Message message={m.message}/>)
-    let newMessageBody = props.newMessageBody
+    let state = props.dialogsPage
 
-    let onSendMessageClick = () => {
-       props.dispatch(sendMessageAC(props.newMessageBody))
+    let dialogsElements = state.dialogsData.map( d => <DialogItem name={d.name} id={d.id}/>)
+    let messagesElements = state.messages.map(m => <Message message={m.message}/>)
+    let newMessageBody = state.newMessageBody
+
+    // let onSendMessageClick = () => {
+    //    props.dispatch(sendMessageAC(props.newMessageBody))
+    // }
+    // let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    //     props.dispatch(updateNewMessageBodyAC(e.currentTarget.value))
+    // }
+
+    const onSendMessageClick = () => {
+        props.sendMessage(state.newMessageBody)
     }
-    let onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageBodyAC(e.currentTarget.value))
+
+    const onNewMessageChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        const text = e.currentTarget.value
+        props.updateNewMessageBody(text)
     }
+
 
     return (
         <div className={s.dialogs}>

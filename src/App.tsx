@@ -9,6 +9,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {RootStateType} from "./redux/redux-store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
     store: RootStateType
@@ -21,12 +22,19 @@ const App: React.FC<AppPropsType> = (props: AppPropsType) => {
             <Header/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Route path={'/dialogs'} render={() => <Dialogs store={props.store}
-                                                                dialogsData={state.dialogsPage.dialogsData}
-                                                                messages={state.dialogsPage.messages}
-                                                                newMessageBody={state.dialogsPage.newMessageBody}
-                                                                dispatch={props.store.dispatch.bind(props.store)}
-                                                                />
+                {/*<Route path={'/dialogs'} render={() => <Dialogs store={props.store}*/}
+                {/*                                                dialogsData={state.dialogsPage.dialogsData}*/}
+                {/*                                                messages={state.dialogsPage.messages}*/}
+                {/*                                                newMessageBody={state.dialogsPage.newMessageBody}*/}
+                {/*                                                dispatch={props.store.dispatch.bind(props.store)}*/}
+                {/*                                                />*/}
+                {/*}/>*/}
+                <Route path={'/dialogs'} render={() => <DialogsContainer store={props.store}
+                                                                // dialogsData={state.dialogsPage.dialogsData}
+                                                                // messages={state.dialogsPage.messages}
+                                                                // newMessageBody={state.dialogsPage.newMessageBody}
+                                                                // dispatch={props.store.dispatch.bind(props.store)}
+                />
                 }/>
                 <Route path={'/profile'} render={() => <Profile
                                                                 // postData={state.profilePage.postData}
