@@ -3,13 +3,12 @@ import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer
 import Dialogs from "./Dialogs";
 import {AppStateType, RootStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import {dialogsPageType} from "../../redux/store";
+import {DialogsDataType, MessagesType} from "../../redux/store";
 import {Dispatch} from "redux";
 
-type DialogsContainerType = {
-    store: RootStateType
-}
-
+// type DialogsContainerType = {
+//     store: RootStateType
+// }
 // const DialogsContainer = (props: DialogsContainerType) => {
 //     const state = props.store.getState()
 //
@@ -28,6 +27,12 @@ type DialogsContainerType = {
 // };
 //
 // export default DialogsContainer;
+
+export type dialogsPageType = {
+    dialogsData: DialogsDataType
+    messages: MessagesType
+    newMessageBody: string
+}
 
 type MapStatePropsType = {
     dialogsPage: dialogsPageType
