@@ -1,3 +1,9 @@
+.userWrapper {
+    border: 1px solid green;
+    display: flex;
+    justify-content: space-around;
+}
+
 .userPhoto {
     width: 100px;
     height: 100px;

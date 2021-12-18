@@ -23,8 +23,8 @@ const Users = (props: UsersPropsType) => {
 
     return (
         <div>
-            {props.users.map(u => <div key={u.id}>
-                <span>
+            {props.users.map(u => <div key={u.id} className = {styles.userWrapper}>
+                <div>
                     <div>
                         <img src={u.photoURL} className = {styles.userPhoto}/>
                     </div>
@@ -33,8 +33,8 @@ const Users = (props: UsersPropsType) => {
                         ? <button onClick={() => {props.unfollow(u.id)}}>unfollow</button>
                         : <button onClick={() => {props.follow(u.id)}}>follow</button> }
                     </div>
-                </span>
-                <span>
+                </div>
+                <div>
                     <span>
                         <div>{u.fullName}</div>
                         <div>{u.status}</div>
@@ -43,7 +43,7 @@ const Users = (props: UsersPropsType) => {
                         <div>{u.location.country}</div>
                         <div>{u.location.city}</div>
                     </span>
-                </span>
+                </div>
             </div>)}
         </div>
     );
