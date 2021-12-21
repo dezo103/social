@@ -12,24 +12,17 @@ export type UsersPropsType = {
 }
 
 const Users = (props: UsersPropsType) => {
-    if (props.users.length === 0) {
-
-        axios.get('https://social-network.samuraijs.com/api/1.0//users').then(response => {
-            props.setUsers(response.data.items)
-        })
-
-        // props.setUsers([
-        //     {id: 1, photoURL: "https://i2.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1",
-        //         followed: false, fullName: "Tom", status: "goodMan", location: {city: "Minsk", country: "Belarus"}},
-        //     {id: 2, photoURL: "https://i2.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1",
-        //         followed: true, fullName: "Ann", status: "goodGirl", location: {city: "Moscow", country: "Russia"}},
-        //     {id: 3, photoURL: "https://i2.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1",
-        //         followed: false, fullName: "Kim", status: "goodBoss", location: {city: "Kiev", country: "Ukraine"}},
-        // ])
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0//users').then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
     }
 
     return (
         <div>
+            <button onClick={getUsers}>GetUsers</button>
             {props.users.map(u => <div key={u.id} className = {styles.userWrapper}>
                 <div>
                     <div>

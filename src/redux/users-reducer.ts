@@ -34,8 +34,7 @@ const InitialState: InitialStateType = {
         //     followed: true, fullName: "Ann", status: "goodGirl", location: {city: "Moscow", country: "Russia"}},
         // {id: 3, photoURL: "https://i2.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1",
         //     followed: false, fullName: "Kim", status: "goodBoss", location: {city: "Kiev", country: "Ukraine"}},
-    ],
-
+    ]
 }
 
 export const usersReducer = (state: InitialStateType  = InitialState, action: any) => {
