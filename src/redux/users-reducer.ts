@@ -2,6 +2,8 @@
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = "SET_USES"
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 
 export type LocationType = {
     city: string
@@ -24,17 +26,16 @@ export type UsersType  = {
 
 export type InitialStateType = {
     users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 const InitialState: InitialStateType = {
-    users: [
-        // {id: 1, photoURL: "https://i2.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1",
-        //     followed: false, fullName: "Tom", status: "goodMan", location: {city: "Minsk", country: "Belarus"}},
-        // {id: 2, photoURL: "https://i2.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1",
-        //     followed: true, fullName: "Ann", status: "goodGirl", location: {city: "Moscow", country: "Russia"}},
-        // {id: 3, photoURL: "https://i2.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1",
-        //     followed: false, fullName: "Kim", status: "goodBoss", location: {city: "Kiev", country: "Ukraine"}},
-    ]
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1
 }
 
 export const usersReducer = (state: InitialStateType  = InitialState, action: any) => {
@@ -56,7 +57,17 @@ export const usersReducer = (state: InitialStateType  = InitialState, action: an
         case SET_USERS:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: action.users
+            }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount
             }
         default:
             return state
@@ -71,5 +82,11 @@ export const unfollowAC = (userID: number) => {
 }
 export const setUsersAC = (users: Array<UsersType>) => {
     return {type: SET_USERS, users: users} as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+    return {type: SET_CURRENT_PAGE, currentPage}
+}
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {type: SET_TOTAL_USERS_COUNT, totalUsersCount}
 }
 export default usersReducer
