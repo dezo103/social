@@ -41,13 +41,7 @@ export class Users extends React.Component<UsersPropsType> {
 
         return (
             <div>
-                <div className = {styles.pagination}>
-                    {
-                        pages.map(p => {
-                            return <span className={this.props.currentPage ===  p ? styles.selectedPage : ""} onClick={() => this.onPageChanged(p)}>{p} </span>
-                        })
-                    }
-                </div>
+
                 {this.props.users.map(u => <div key={u.id} className = {styles.userWrapper}>
                     <div>
                         <div>
@@ -60,16 +54,23 @@ export class Users extends React.Component<UsersPropsType> {
                         </div>
                     </div>
                     <div>
-                    <span>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
-                    </span>
                         <span>
-                        <div>{"u.location.country"}</div>
-                        <div>{"u.location.city"}</div>
-                    </span>
+                            <div>{u.name}</div>
+                            <div>{u.status}</div>
+                        </span>
+                            <span>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
+                        </span>
                     </div>
                 </div>)}
+                <div className = {styles.pagination}>
+                    {
+                        pages.map(p => {
+                            return <span className={this.props.currentPage ===  p ? styles.selectedPage : ""} onClick={() => this.onPageChanged(p)}>{p} </span>
+                        })
+                    }
+                </div>
             </div>
         );
     }
