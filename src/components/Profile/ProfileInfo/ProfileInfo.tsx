@@ -20,6 +20,7 @@ const ProfileInfo = (props: any) => {
                 <p>{props.profile.aboutMe}</p>
                 <p>{props.profile.fullName}</p>
                 <p>{props.profile.lookingForAJobDescription}</p>
+                <p>{props.profile.lookingForAJob ? 'Да, ищу' : 'Неа'}</p>
             </div>
         </div>
     )
