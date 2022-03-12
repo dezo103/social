@@ -3,7 +3,23 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {setUserProfile} from "../../redux/profile-reducer";
-import {withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
+
+type PathParamsType = {
+    userId: string
+}
+
+type CommonPropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
+
+type mapStatePropsType = {
+    profile: any
+}
+
+type mapDispatchPropsType = {
+    setUserProfile: (profile: any) => void
+}
+
+export type ProfilePropsType = mapStatePropsType & mapDispatchPropsType
 
 class ProfileContainer extends React.Component<any>{
 
@@ -25,7 +41,7 @@ class ProfileContainer extends React.Component<any>{
     }
 }
 
-let mapStateToProps = (state: any) => ({
+let mapStateToProps = (state: any): mapStatePropsType => ({
     profile: state.profilePage.profile
 })
 
