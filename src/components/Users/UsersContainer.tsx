@@ -11,10 +11,9 @@ import {
     unfollow,
     UsersType
 } from "../../redux/users-reducer";
-import {Dispatch} from "redux";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {usersAPI} from "../../API/api";
 
 export type MapStatePropsType = {
     users: Array<UsersType>
@@ -42,31 +41,25 @@ export class UsersContainer extends React.Component<UsersAPIPropsType> {
 
     componentDidMount(): void {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+            this.props.toggleIsFetching(false)
+            this.props.setUsers(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
         })
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-            })
     }
 
     onPageChanged = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${p}&count=${this.props.pageSize}`, {
-            withCredentials: true
+        usersAPI.getUsers(p, this.props.pageSize).then(data => {
+            this.props.toggleIsFetching(false)
+            this.props.setUsers(data.items)
         })
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(response.data.items)
-            })
     }
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader /> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users
                 users={this.props.users}
                 follow={this.props.follow}
@@ -96,6 +89,6 @@ export default connect(mapStateToProps, {
     unfollow: unfollow,
     setUsers: setUsers,
     setCurrentPage: setCurrentPage,
-    setTotalUsersCount:setTotalUsersCount,
+    setTotalUsersCount: setTotalUsersCount,
     toggleIsFetching: toggleIsFetching
 })(UsersContainer)
