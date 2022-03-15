@@ -4,6 +4,7 @@ import userPhoto from "../../assets/images/user.png";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../API/api";
 
 export type UsersPropsType = {
     users: Array<UsersType>
@@ -36,12 +37,7 @@ export const Users = (props: UsersPropsType) => {
                     {u.followed
                         ? <button disabled={props.followingInProgress.some(id => id ===u.id)} onClick={() => {
                             props.toggleFollowingProgress(true, u.id)
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                withCredentials: true,
-                                headers: {
-                                    "API-KEY": "166b9e97-d8fe-44b6-af0e-8586f7357111"
-                                }
-                            })
+                            usersAPI.unfollow(u.id)
                                 .then(response => {
                                     if (response.data.resultCode == 0) {
                                         props.unfollow(u.id)
@@ -52,11 +48,7 @@ export const Users = (props: UsersPropsType) => {
                         }}>unfollow</button>
                         : <button disabled={props.followingInProgress.some(id => id ===u.id)} onClick={() => {
                             props.toggleFollowingProgress(true, u.id)
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                withCredentials: true,
-                                headers: {
-                                    "API-KEY": "166b9e97-d8fe-44b6-af0e-8586f7357111"
-                                }})
+                            usersAPI.follow(u.id)
                                 .then(response => {
                                     if (response.data.resultCode == 0) {
                                         props.follow(u.id)
