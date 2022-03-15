@@ -3,17 +3,15 @@ import {connect} from "react-redux";
 
 import {AppStateType} from "../../redux/redux-store";
 import {
-    follow, getUsersThunkCreator,
+    follow,
+    getUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setUsers, toggleFollowingProgress,
-    toggleIsFetching,
+    toggleFollowingProgress,
     unfollow,
     UsersType
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {usersAPI} from "../../API/api";
 
 export type MapStatePropsType = {
     users: Array<UsersType>
@@ -28,14 +26,11 @@ export type UsersAPIPropsType = {
     users: Array<UsersType>
     follow: (userID: number) => void
     unfollow: (userID: number) => void
-    setUsers: (users: Array<UsersType>) => void
     totalUsersCount: number
     pageSize: number
     currentPage: number
     setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
     isFetching: boolean
-    toggleIsFetching: (isFetching: boolean) => void
     toggleFollowingProgress: (isInProgress: boolean, uId: number) => void
     followingInProgress: Array<number>
     getUsers: (currentPage: number, pageSize: number) => void
@@ -84,10 +79,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 export default connect(mapStateToProps, {
     follow,
     unfollow,
-    setUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
     toggleFollowingProgress,
-    getUsers: getUsersThunkCreator
+    getUsers
 })(UsersContainer)
