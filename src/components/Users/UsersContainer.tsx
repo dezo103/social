@@ -57,7 +57,6 @@ export class UsersContainer extends React.Component<UsersAPIPropsType> {
                 totalUsersCount={this.props.totalUsersCount}
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
-                toggleFollowingProgress={this.props.toggleFollowingProgress}
                 followingInProgress={this.props.followingInProgress}
             />
         </>
