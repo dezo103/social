@@ -45,7 +45,6 @@ let mapStateToProps = (state: any): mapStatePropsType => ({
     profile: state.profilePage.profile,
 })
 
-
 export default compose<ComponentType>(
     connect(mapStateToProps, {getUserProfile}),
     withRouter,

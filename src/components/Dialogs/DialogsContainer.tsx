@@ -37,11 +37,6 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     }
 }
 
-
-// const DialogsContainer = WithAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(Dialogs))
-//
-// export default DialogsContainer;
-
 export default compose<ComponentType>(
     WithAuthRedirect,
     connect(mapStateToProps, mapDispatchToProps)
