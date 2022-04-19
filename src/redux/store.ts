@@ -1,6 +1,6 @@
 import dialogsReducer, {SendMessageActionType, UpdateNewMessageBodyActionType} from "./dialogs-reducer";
 import profileReducer, {
-    AddPostActionType,
+    AddPostActionType, SetStatusActionType,
     SetUserProfileActionType,
     UpdateNewPostTextActionType
 } from "./profile-reducer";
@@ -15,6 +15,7 @@ export type profilePageType = {
     postData: postDataType
     newPostText: string
     profile: any
+    status: string
 }
 export type DialogType = {
     id: number
@@ -48,7 +49,8 @@ export type ActionsTypes =
     UpdateNewPostTextActionType |
     SendMessageActionType |
     UpdateNewMessageBodyActionType |
-    SetUserProfileActionType
+    SetUserProfileActionType |
+    SetStatusActionType
 
 const store: StoreType = {
     _state: {
@@ -58,7 +60,8 @@ const store: StoreType = {
             {id: 5, message: "cryptocurency - is the best investment", likesCount: 12},
         ],
         newPostText: '',
-        profile: null
+        profile: null,
+        status: ""
     },
     dialogsPage: {
         dialogsData: [

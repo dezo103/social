@@ -1,8 +1,8 @@
 import React, {ComponentType} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile} from "../../redux/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
@@ -13,7 +13,8 @@ type PathParamsType = {
 type CommonPropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 type mapStatePropsType = {
-    profile: any
+    profile: any,
+    status: string
 }
 
 type mapDispatchPropsType = {
@@ -30,12 +31,16 @@ class ProfileContainer extends React.Component<any>{
             userId = 2
         }
         this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render () {
 
         return (
-            <Profile {...this.props} profile={this.props.profile} />
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         )
     }
 }
@@ -43,10 +48,11 @@ class ProfileContainer extends React.Component<any>{
 
 let mapStateToProps = (state: any): mapStatePropsType => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status
 })
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
     WithAuthRedirect
 )(ProfileContainer)
