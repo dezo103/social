@@ -2,20 +2,27 @@ import React from 'react';
 
 import s from './ProfileInfo.module.css';
 
-export type ProfileStatusPropsType = {
-    status: string
-}
 
-export const ProfileStatus = (props: ProfileStatusPropsType) => {
+const ProfileStatus = (props: any) => {
+
+    let state = {
+        editMode: false
+    }
+
     return (
         <div>
-            <div>
-                <span>{props.status}</span>
-            </div>
-            <div>
-                <input value={props.status}></input>
-            </div>
+            {!state.editMode
+                ? <div>
+                    <span>{props.status}</span>
+                </div>
+                : <div>
+                    <input value={props.status}></input>
+                </div>
+            }
         </div>
     );
 };
+
+
+export default ProfileStatus
 
