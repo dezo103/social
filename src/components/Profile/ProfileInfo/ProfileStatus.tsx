@@ -1,8 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
 
-import s from './ProfileInfo.module.css';
-import {useDispatch} from "react-redux";
-
 
 const ProfileStatus = (props: any) => {
 
