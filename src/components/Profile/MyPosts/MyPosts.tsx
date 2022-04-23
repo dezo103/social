@@ -7,9 +7,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 type MyPostsPropsType = {
     addPost: (newPostText: string) => void
-    //updateNewPostText: (text: string) => void
     postData: postDataType
-    //newPostText: string
 }
 
 const MyPosts = (props: MyPostsPropsType) => {

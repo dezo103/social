@@ -10,18 +10,15 @@ export type postDataType = Array<PostType>
 
 type MapStatePropsType = {
     postData: postDataType
-    //newPostText: string
 }
 
 type mapDispatchPropsType = {
     addPost: (newPostText: string) => void
-    //updateNewPostText: (text: string) => void
 }
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        postData: state.profilePage.postData,
-        //newPostText: state.profilePage.newPostText
+        postData: state.profilePage.postData
     }
 }
 

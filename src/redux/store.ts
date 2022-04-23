@@ -1,10 +1,7 @@
-import dialogsReducer, {SendMessageActionType,
-    //UpdateNewMessageBodyActionType
-} from "./dialogs-reducer";
+import dialogsReducer, {SendMessageActionType} from "./dialogs-reducer";
 import profileReducer, {
     AddPostActionType, SetStatusActionType,
     SetUserProfileActionType,
-    //UpdateNewPostTextActionType
 } from "./profile-reducer";
 
 export type PostType = {
@@ -15,7 +12,6 @@ export type PostType = {
 export type postDataType = Array<PostType>
 export type profilePageType = {
     postData: postDataType
-    //newPostText: string
     profile: any
     status: string
 }
@@ -32,7 +28,6 @@ export type MessagesType = Array<MessageType>
 export type dialogsPageType = {
     dialogsData: DialogsDataType
     messages: MessagesType
-    //newMessageBody: string
 }
 export type RootStateType = {
     profilePage: profilePageType
@@ -48,9 +43,7 @@ export type StoreType = {
 
 export type ActionsTypes =
     AddPostActionType |
-    //UpdateNewPostTextActionType |
     SendMessageActionType |
-   // UpdateNewMessageBodyActionType |
     SetUserProfileActionType |
     SetStatusActionType
 
@@ -61,7 +54,6 @@ const store: StoreType = {
             {id: 1, message: "Hi hi hi", likesCount: 12},
             {id: 5, message: "cryptocurency - is the best investment", likesCount: 12},
         ],
-        //newPostText: '',
         profile: null,
         status: ""
     },
@@ -79,7 +71,6 @@ const store: StoreType = {
             {id: 2, message: "How are you"},
             {id: 3, message: "Yo"}
         ],
-       // newMessageBody: ''
     }
 },
     _onChange() {
