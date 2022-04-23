@@ -1,9 +1,7 @@
 import {ActionsTypes, DialogType, MessageType} from "./store";
 
 export type SendMessageActionType = ReturnType<typeof sendMessageAC>
-//export type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyAC>
 
-//const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 const initialState = {
@@ -26,11 +24,6 @@ export type InitialStateType = typeof initialState
 
 const dialogsReducer = (state:InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        // case UPDATE_NEW_MESSAGE_BODY:
-        //     return {
-        //         ...state,
-        //         newMessageBody: action.body
-        //     }
         case SEND_MESSAGE:
             const newMessage: MessageType = {
                 id: 6,
@@ -51,12 +44,5 @@ export const sendMessageAC  = (newMessageBody: string) => {
         newMessageBody: newMessageBody
     }as const
 }
-// export const updateNewMessageBodyAC = (body: string) => {
-//     return {
-//         type: UPDATE_NEW_MESSAGE_BODY,
-//         body: body
-//     } as const
-// }
-
 
 export default dialogsReducer

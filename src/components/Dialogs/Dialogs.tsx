@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -20,16 +20,7 @@ const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = state.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>)
     let messagesElements = state.messages.map(m => <Message message={m.message}/>)
-    // let newMessageBody = state.newMessageBody
 
-    // const onSendMessageClick = () => {
-    //     props.sendMessage(state.newMessageBody)
-    // }
-
-    // const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //     const text = e.currentTarget.value
-    //     props.updateNewMessageBody(text)
-    // }
 
     const addNewMessage = (values: addMessageFormDataType) => {
         props.sendMessage(values.newMessageBody)

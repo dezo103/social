@@ -10,7 +10,6 @@ import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 export type dialogsPageType = {
     dialogsData: DialogsDataType
     messages: MessagesType
-   // newMessageBody: string
 }
 
 type MapStatePropsType = {
@@ -19,7 +18,6 @@ type MapStatePropsType = {
 }
 
 type mapDispatchPropsType = {
-    //updateNewMessageBody: (text: string) => void
     sendMessage: (newMessageBody: string) => void
 }
 
@@ -32,7 +30,6 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
-        //updateNewMessageBody: (text) => {dispatch(updateNewMessageBodyAC(text))},
         sendMessage: (newMessageBody) => {dispatch(sendMessageAC(newMessageBody))}
     }
 }
