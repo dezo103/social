@@ -1,5 +1,5 @@
 import React, {ComponentType} from 'react';
-import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {sendMessageAC} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
@@ -10,7 +10,7 @@ import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 export type dialogsPageType = {
     dialogsData: DialogsDataType
     messages: MessagesType
-    newMessageBody: string
+   // newMessageBody: string
 }
 
 type MapStatePropsType = {
@@ -19,7 +19,7 @@ type MapStatePropsType = {
 }
 
 type mapDispatchPropsType = {
-    updateNewMessageBody: (text: string) => void
+    //updateNewMessageBody: (text: string) => void
     sendMessage: (newMessageBody: string) => void
 }
 
@@ -32,7 +32,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
-        updateNewMessageBody: (text) => {dispatch(updateNewMessageBodyAC(text))},
+        //updateNewMessageBody: (text) => {dispatch(updateNewMessageBodyAC(text))},
         sendMessage: (newMessageBody) => {dispatch(sendMessageAC(newMessageBody))}
     }
 }
