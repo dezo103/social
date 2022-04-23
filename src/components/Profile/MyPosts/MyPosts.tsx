@@ -19,7 +19,6 @@ const MyPosts = (props: MyPostsPropsType) => {
         props.addPost(values.newPostText)
     }
 
-
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
