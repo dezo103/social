@@ -14,7 +14,9 @@ type CommonPropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 type mapStatePropsType = {
     profile: any,
-    status: string
+    status: string,
+    authorizedUserId: number,
+    isAuth: any
 }
 
 type mapDispatchPropsType = {
@@ -28,7 +30,7 @@ class ProfileContainer extends React.Component<any>{
     componentDidMount() {
         let userId = this.props.match.params.userId
         if(!userId) {
-            userId = 2
+            userId = this.props.authorizedUserId
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -48,7 +50,9 @@ class ProfileContainer extends React.Component<any>{
 
 let mapStateToProps = (state: any): mapStatePropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 export default compose<ComponentType>(
