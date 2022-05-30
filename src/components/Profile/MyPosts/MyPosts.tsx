@@ -12,7 +12,8 @@ type MyPostsPropsType = {
     postData: postDataType
 }
 
-class MyPosts extends React.Component<MyPostsPropsType> {
+class MyPosts extends React.PureComponent<MyPostsPropsType> {
+
     render() {
         let postsElements = this.props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
