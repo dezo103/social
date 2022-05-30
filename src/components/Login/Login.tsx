@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../common/FormsControls/FormsControls";
+import {createField, Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
@@ -16,25 +16,27 @@ type FormDataType = {
 }
 
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'email'} name={'email'}
-                       component={Input} validate={[required]}/>
-            </div>
-            <div>
-                <Field placeholder={'password'} name={'password'} type={'password'}
-                       component={Input} validate={[required]}/>
-            </div>
-            <div>
-                <Field type={'checkbox'} name={'rememberMe'}
-                       component={Input}/>
-            </div>
-            {
-                props.error &&
+        <form onSubmit={handleSubmit}>
+            {/*<div>*/}
+            {/*    <Field placeholder={'email'} name={'email'}*/}
+            {/*           component={Input} validate={[required]}/>*/}
+            {/*</div>*/}
+            {createField('email', 'email', Input, [required])}
+            {/*<div>*/}
+            {/*    <Field placeholder={'password'} name={'password'} type={'password'}*/}
+            {/*           component={Input} validate={[required]}/>*/}
+            {/*</div>*/}
+            {createField('password', 'password', Input, [required], {type: 'password'})}
+            {/*<div>*/}
+            {/*    <Field type={'checkbox'} name={'rememberMe'}*/}
+            {/*           component={Input}/>*/}
+            {/*</div>*/}
+            {createField(null, 'rememberMe', Input, [], {type: 'checkbox'}, 'rememberMe')}
+            {error &&
                 <div className = {style.formSummaryError}>
-                    {props.error}
+                    {error}
                 </div>
             }
             <div>
@@ -50,7 +52,6 @@ const Login = (props: any) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     }
-
     return props.isAuth
     ? <Redirect to={"/profile"}/>
     : <div>

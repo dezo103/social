@@ -31,14 +31,15 @@ export const authReducer = (state: InitialStateType = InitialState, action: any)
 }
 
 export const setAuthUserData = (userId: any, email: any, login: any, isAuth: boolean) => ({
-    type: 'SET_USER_DATA',
+    type: 'samurai-network/auth/SET_USER_DATA',
     payload: {userId, email, login, isAuth}
 })
 
 export const getAuthUserData = () => async (dispatch: Dispatch) => {
     let response = await authAPI.me()
 
-    if (response.data.resultCode == 0) {    // response code 1
+    if (response.data.resultCode == 0) {
+        // response code 1
         let {id, email, login} = response.data.data
         dispatch(setAuthUserData(id, email, login, true))
     }

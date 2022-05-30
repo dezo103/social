@@ -52,17 +52,11 @@ export const usersReducer = (state: InitialStateType = InitialState, action: any
         case FOLLOW:
             return {
                 ...state,
-                // users: state.users.map(u => {
-                //     return u.id === action.userID ? {...u, followed: true} : u
-                // })
                 users: updateObjectInArray(state.users, action.userID, 'id', {followed: true})
             }
         case UNFOLLOW:
             return {
                 ...state,
-                // users: state.users.map(u => {
-                //     return u.id === action.userID ? {...u, followed: false} : u
-                // })
                 users: updateObjectInArray(state.users, action.userID, 'id', {followed: false})
             }
         case SET_USERS:
