@@ -12,26 +12,24 @@ type MyPostsPropsType = {
     postData: postDataType
 }
 
-class MyPosts extends React.PureComponent<MyPostsPropsType> {
+const MyPosts = React.memo((props: MyPostsPropsType) => {
+    console.log('render myPost')
+    let postsElements = props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-    render() {
-        let postsElements = this.props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
-
-        const addPost = (values: addNewPostFormDataType) => {
-            this.props.addPost(values.newPostText)
-        }
-
-        return (
-            <div className={s.postsBlock}>
-                <h3>My posts</h3>
-                <AddNewPostReduxForm onSubmit={addPost}/>
-                <div className={s.posts}>
-                    {postsElements}
-                </div>
-            </div>
-        )
+    const addPost = (values: addNewPostFormDataType) => {
+        props.addPost(values.newPostText)
     }
-}
+
+    return (
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
+            <AddNewPostReduxForm onSubmit={addPost}/>
+            <div className={s.posts}>
+                {postsElements}
+            </div>
+        </div>
+    )
+})
 
 
 export const maxLength10 = maxLengthCreator(10)
