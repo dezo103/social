@@ -10,14 +10,6 @@
     border-radius: 50%;
 }
 
-.pagination span {
-    cursor: pointer;
-    color: white;
-}
 
-.selectedPage {
-    color: sandybrown !important;
-    font-weight: bold;
-}
 
 
