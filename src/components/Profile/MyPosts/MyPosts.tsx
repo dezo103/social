@@ -12,22 +12,24 @@ type MyPostsPropsType = {
     postData: postDataType
 }
 
-const MyPosts = (props: MyPostsPropsType) => {
-    let postsElements = props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+class MyPosts extends React.Component<MyPostsPropsType> {
+    render() {
+        let postsElements = this.props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-    const addPost = (values: addNewPostFormDataType) => {
-        props.addPost(values.newPostText)
-    }
+        const addPost = (values: addNewPostFormDataType) => {
+            this.props.addPost(values.newPostText)
+        }
 
-    return (
-        <div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <AddNewPostReduxForm onSubmit={addPost}/>
-            <div className={s.posts}>
-                {postsElements}
+        return (
+            <div className={s.postsBlock}>
+                <h3>My posts</h3>
+                <AddNewPostReduxForm onSubmit={addPost}/>
+                <div className={s.posts}>
+                    {postsElements}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 
