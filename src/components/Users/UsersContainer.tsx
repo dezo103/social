@@ -44,14 +44,17 @@ export type UsersAPIPropsType = {
     getUsers: (currentPage: number, pageSize: number) => void
 }
 
+
 export class UsersContainer extends React.Component<UsersAPIPropsType> {
 
     componentDidMount(): void {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        let {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (p: number) => {
-        this.props.getUsers(p, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUsers(p, pageSize)
     }
 
     render() {
@@ -70,17 +73,6 @@ export class UsersContainer extends React.Component<UsersAPIPropsType> {
         </>
     }
 }
-
-// const mapStateToProps = (state: AppStateType): MapStatePropsType => {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// }
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
