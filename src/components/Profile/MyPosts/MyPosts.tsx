@@ -13,7 +13,6 @@ type MyPostsPropsType = {
 }
 
 const MyPosts = React.memo((props: MyPostsPropsType) => {
-    console.log('render myPost')
     let postsElements = props.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     const addPost = (values: addNewPostFormDataType) => {
