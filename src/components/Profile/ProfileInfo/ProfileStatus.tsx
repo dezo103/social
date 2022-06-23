@@ -38,7 +38,7 @@ const ProfileStatus = (props: any) => {
                         value={state.status}
                         onBlur={deactivateEditMode}
                         autoFocus={true}
-                        onChange={(e) => onStatusChange(e)}></input>
+                        onChange={(e) => onStatusChange(e)} />
                 </div>
             }
         </div>
