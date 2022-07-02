@@ -1,6 +1,6 @@
 import dialogsReducer, {SendMessageActionType} from "./dialogs-reducer";
 import profileReducer, {
-    AddPostActionType, DeletePostActionType, SetStatusActionType,
+    AddPostActionType, DeletePostActionType, SavePhotoSuccessActionType, SetStatusActionType,
     SetUserProfileActionType,
 } from "./profile-reducer";
 
@@ -46,7 +46,9 @@ export type ActionsTypes =
     SendMessageActionType |
     SetUserProfileActionType |
     SetStatusActionType |
-    DeletePostActionType
+    DeletePostActionType |
+    SavePhotoSuccessActionType
+
 
 const store: StoreType = {
     _state: {

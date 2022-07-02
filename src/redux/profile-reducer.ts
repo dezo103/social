@@ -6,11 +6,13 @@ export type AddPostActionType = ReturnType<typeof addPostAC>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 export type SetStatusActionType = ReturnType<typeof setStatus>
 export type DeletePostActionType = ReturnType<typeof deletePost>
+export type SavePhotoSuccessActionType = ReturnType<typeof savePhotoSuccess>
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'SET-STATUS'
 const DELETE_POST = 'DELETE-POST'
+const SAVE_PHOTO_SUCCESS = 'SAVE-PHOTO-SUCCESS'
 
 const initialState: profilePageType = {
     postData: [
@@ -40,6 +42,8 @@ const profileReducer = (state: profilePageType = initialState, action: ActionsTy
             return {...state, status: action.status}
         case DELETE_POST:
             return {...state, postData: state.postData.filter(p => p.id != action.id )}
+        case SAVE_PHOTO_SUCCESS:
+            return {...state, profile: {...state.profile, photos: action.photos}}
         default:
             return state
     }
@@ -55,6 +59,7 @@ export const addPostAC = (newPostText: string) => {
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 export const deletePost = (id: number) => ({type: DELETE_POST, id} as const)
+export const savePhotoSuccess = (photos: Array<any>) => ({type: SAVE_PHOTO_SUCCESS, photos} as const)
 
 
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch) => {
@@ -67,9 +72,15 @@ export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
 }
 export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
     let response = await profileAPI.updateStatus(status)
-    if(response.data.resultCode === 0) {
+    if (response.data.resultCode === 0) {
         dispatch(setStatus(status))
     }
 }
 
+export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
 export default profileReducer
