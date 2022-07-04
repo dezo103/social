@@ -19,20 +19,8 @@ type FormDataType = {
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
-            {/*<div>*/}
-            {/*    <Field placeholder={'email'} name={'email'}*/}
-            {/*           component={Input} validate={[required]}/>*/}
-            {/*</div>*/}
             {createField('email', 'email', Input, [required])}
-            {/*<div>*/}
-            {/*    <Field placeholder={'password'} name={'password'} type={'password'}*/}
-            {/*           component={Input} validate={[required]}/>*/}
-            {/*</div>*/}
             {createField('password', 'password', Input, [required], {type: 'password'})}
-            {/*<div>*/}
-            {/*    <Field type={'checkbox'} name={'rememberMe'}*/}
-            {/*           component={Input}/>*/}
-            {/*</div>*/}
             {createField(null, 'rememberMe', Input, [], {type: 'checkbox'}, 'rememberMe')}
             {error &&
                 <div className = {style.formSummaryError}>
