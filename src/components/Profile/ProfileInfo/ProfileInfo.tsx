@@ -21,7 +21,11 @@ const ProfileInfo = (props: any) => {
     }
 
     const onSubmit = (formData: any) => {
-        props.saveProfile(formData)
+        props.saveProfile(formData).then(
+            () => {
+                setEditMode(false)
+            }
+        )
     }
 
     return (
@@ -34,9 +38,9 @@ const ProfileInfo = (props: any) => {
 
                 {editMode
                     ? <ProfileDataFormReduxForm
-                        profile={props.profile}
-                        isOwner={props.isOwner}
+                        initialValues={props.profile}
                         onSubmit={onSubmit}
+                        profile={props.profile}
                     />
                     : <ProfileData profile={props.profile}
                                    isOwner={props.isOwner}

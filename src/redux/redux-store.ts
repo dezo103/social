@@ -6,6 +6,7 @@ import {authReducer} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 import {appReducer} from "./app-reducer";
+import {useDispatch} from "react-redux";
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
