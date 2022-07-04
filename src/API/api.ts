@@ -61,5 +61,11 @@ export const authAPI = {
     }
 }
 
+export const secutityAPI = {
+    getCaptchaUrl() {
+        return instance.get(`security/get-captcha-url`)
+    }
+}
+
 
 
