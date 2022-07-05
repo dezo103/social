@@ -20,6 +20,11 @@ type FormDataType = {
 const LoginForm: React.FC<InjectedFormProps<any>> = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
+
+            <p>To log in input this data:</p>
+            <p>Email: free@samuraijs.com</p>
+            <p>Password: free</p>
+
             {createField('email', 'email', Input, [required])}
             {createField('password', 'password', Input, [required], {type: 'password'})}
             {createField(null, 'rememberMe', Input, [], {type: 'checkbox'}, 'rememberMe')}
