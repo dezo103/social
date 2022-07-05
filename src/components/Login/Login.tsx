@@ -13,32 +13,38 @@ type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
 }
 
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
+const LoginForm: React.FC<InjectedFormProps<any>> = (props: any) => {
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
             {createField('email', 'email', Input, [required])}
             {createField('password', 'password', Input, [required], {type: 'password'})}
             {createField(null, 'rememberMe', Input, [], {type: 'checkbox'}, 'rememberMe')}
-            {error &&
+
+            {props.captchaUrl && <img src={props.captchaUrl} alt="captcha"/>}
+            {props.captchaUrl && createField('symbols from image', 'captcha', Input, [required], {})}
+
+            {props.error &&
                 <div className = {style.formSummaryError}>
-                    {error}
+                    {props.error}
                 </div>
             }
             <div>
                 <button>Login</button>
             </div>
+
         </form>
     );
 };
 
-const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType, any>({form: 'login'})(LoginForm)
 
 const Login = (props: any) => {
     const onSubmit = (formData: FormDataType) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
     return props.isAuth
     ? <Redirect to={"/profile"}/>
@@ -46,13 +52,14 @@ const Login = (props: any) => {
             <h1>
                 Login
             </h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl = {props.captchaUrl}/>
         </div>
 
 };
 
 const mapStateToProps = (state: AppStateType) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps, {login})(Login)
