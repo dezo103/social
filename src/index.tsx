@@ -1,16 +1,11 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import store from "./redux/redux-store";
-import ReactDOM from "react-dom";
-// import {BrowserRouter} from "react-router-dom";
-// import {Provider} from "react-redux";
-// import App from "./App";
-import SamuraiJSApp from "./App";
+import ReactDOM from 'react-dom';
+import SamuraiJSApp from './App';
 
 
 export const rerenderEntireTree = () => {
-    console.log(store.getState())
     ReactDOM.render(
         <React.StrictMode>
             <SamuraiJSApp />

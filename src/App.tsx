@@ -1,13 +1,12 @@
 import React, {ComponentType} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {HashRouter, Route, withRouter} from 'react-router-dom';
+import {HashRouter, Redirect, Route, withRouter} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-//import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
@@ -20,8 +19,17 @@ const Login = React.lazy(() => import("./components/Login/Login"))
 
 class App extends React.Component<any, any> {
 
+    catchAllUnhandledErrors = (promiseRejectionEvent: any) => {
+        console.error(promiseRejectionEvent)
+    }
+
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener('unhandleedrejection', this.catchAllUnhandledErrors)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('unhandleedrejection', this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -41,8 +49,11 @@ class App extends React.Component<any, any> {
                     }}/>
                     <Route path={'/profile/:userId?'} render={() => {
                         return <React.Suspense fallback={<Preloader/>}>
-                             <ProfileContainer/>
+                            <ProfileContainer/>
                         </React.Suspense>
+                    }}/>
+                    <Route exact path={'/'} render={() => {
+                        return <Redirect to={'/profile'}/>
                     }}/>
                     <Route path={'/news'} render={() => <News/>}/>
                     <Route path={'/music'} render={() => <Music/>}/>
@@ -53,6 +64,7 @@ class App extends React.Component<any, any> {
                             <Login/>
                         </React.Suspense>
                     }}/>
+                    {/*<Route exact path={'*'} render={() => <div>404 not found</div>}/>*/}
                 </div>
             </div>
         )

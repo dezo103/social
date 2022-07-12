@@ -1,10 +1,10 @@
 import React, {ComponentType} from 'react';
-import Profile from "./Profile";
-import {connect} from "react-redux";
-import {getStatus, getUserProfile, updateStatus, savePhoto, saveProfile} from "../../redux/profile-reducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
-import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import {compose} from "redux";
+import Profile from './Profile';
+import {connect} from 'react-redux';
+import {getStatus, getUserProfile, updateStatus, savePhoto, saveProfile} from '../../redux/profile-reducer';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {WithAuthRedirect} from '../../hoc/WithAuthRedirect';
+import {compose} from 'redux';
 
 type PathParamsType = {
     userId: string
@@ -50,7 +50,6 @@ class ProfileContainer extends React.Component<any> {
     }
 
     render() {
-
         return (
             <Profile {...this.props}
                      isOwner={!this.props.match.params.userId}

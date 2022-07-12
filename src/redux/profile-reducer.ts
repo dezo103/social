@@ -1,8 +1,8 @@
-import {ActionsTypes, PostType, profilePageType} from "./store";
-import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../API/api";
-import {AppStateType} from "./redux-store";
-import {stopSubmit} from "redux-form";
+import {ActionsTypes, PostType, profilePageType} from './store';
+import {Dispatch} from 'redux';
+import {profileAPI, usersAPI} from '../API/api';
+import {AppStateType} from './redux-store';
+import {stopSubmit} from 'redux-form';
 
 export type AddPostActionType = ReturnType<typeof addPostAC>
 export type SetUserProfileActionType = ReturnType<typeof setUserProfile>
@@ -18,8 +18,8 @@ const SAVE_PHOTO_SUCCESS = 'SAVE-PHOTO-SUCCESS'
 
 const initialState: profilePageType = {
     postData: [
-        {id: 1, message: "Hi hi hi", likesCount: 12},
-        {id: 5, message: "cryptocurency - is the best investment", likesCount: 12},
+        {id: 1, message: 'Hi hi hi', likesCount: 12},
+        {id: 5, message: 'cryptocurency - is the best investment', likesCount: 12},
     ],
     profile: null,
     status: ''
@@ -35,7 +35,7 @@ const profileReducer = (state: profilePageType = initialState, action: ActionsTy
             }
             return {
                 ...state,
-                newPostText: "",
+                newPostText: '',
                 postData: [...state.postData, newPost]
             }
         case SET_USER_PROFILE:
@@ -73,9 +73,14 @@ export const getStatus = (userId: number) => async (dispatch: Dispatch) => {
     dispatch(setStatus(response.data))
 }
 export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
-    let response = await profileAPI.updateStatus(status)
-    if (response.data.resultCode === 0) {
-        dispatch(setStatus(status))
+    try {
+        let response = await profileAPI.updateStatus(status)
+        if (response.data.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
+    }
+    catch(error) {
+        console.error(error)
     }
 }
 
@@ -95,7 +100,7 @@ export const saveProfile = (profile: any) => async (dispatch: Dispatch<any>, get
     else {
         let message = response.data.messages.length > 0
             ? response.data.messages[0]
-            : "Some error"
+            : 'Some error'
         dispatch(stopSubmit('edit-profile', {_error: message}))
         return Promise.reject(response.data.messages[0])
     }
