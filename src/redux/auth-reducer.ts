@@ -1,27 +1,21 @@
-import {Dispatch} from "redux";
-import {authAPI, secutityAPI} from "../API/api";
-import {stopSubmit} from "redux-form";
+import {Dispatch} from 'redux';
+import {authAPI, secutityAPI} from '../API/api';
+import {stopSubmit} from 'redux-form';
 
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'samurai-network/auth/GET_CAPTCHA_URL_SUCCESS'
 
 let InitialState = {
-    userId: null,
-    email: null,
-    login: null,
+    userId: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false,
-    captchaUrl: null
+    captchaUrl: null as string | null
 }
 
-type InitialStateType = {
-    userId: any,
-    email: any,
-    login: any,
-    isAuth: boolean,
-    captchaUrl: any
-}
+export type InitialStateType = typeof InitialState
 
-export const authReducer = (state: InitialStateType = InitialState, action: any) => {
+export const authReducer = (state = InitialState, action: any): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
         case GET_CAPTCHA_URL_SUCCESS:
@@ -34,12 +28,29 @@ export const authReducer = (state: InitialStateType = InitialState, action: any)
     }
 }
 
-export const setAuthUserData = (userId: any, email: any, login: any, isAuth: boolean) => ({
+export type setAuthUserDataPayloadType = {
+    userId: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean
+}
+
+export type setAuthUserDataActionType = {
+    type: typeof SET_USER_DATA
+    payload: setAuthUserDataPayloadType
+}
+
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): setAuthUserDataActionType => ({
     type: 'samurai-network/auth/SET_USER_DATA',
     payload: {userId, email, login, isAuth}
 })
 
-export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
+type getCaptchaUrlSuccessActionType = {
+    type: typeof GET_CAPTCHA_URL_SUCCESS
+    payload: {captchaUrl: string}
+}
+
+export const getCaptchaUrlSuccess = (captchaUrl: string): getCaptchaUrlSuccessActionType => ({
     type: 'samurai-network/auth/GET_CAPTCHA_URL_SUCCESS',
     payload: {captchaUrl}
 })
@@ -65,7 +76,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
         } else {
             let message = response.data.messages.length > 0
                 ? response.data.messages[0]
-                : "Some error"
+                : 'Some error'
             dispatch(stopSubmit('login', {_error: message}))
         }
     }
@@ -81,7 +92,7 @@ export const getCaptchaUrl = () => async (dispatch: Dispatch<any>) => {
     // } else {
     //     let message = response.data.messages.length > 0
     //         ? response.data.messages[0]
-    //         : "Some error"
+    //         : 'Some error'
     //     dispatch(stopSubmit('login', {_error: message}))
     // }
 }
