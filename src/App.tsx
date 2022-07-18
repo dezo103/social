@@ -58,7 +58,7 @@ class App extends React.Component<any, any> {
                     <Route path={'/news'} render={() => <News/>}/>
                     <Route path={'/music'} render={() => <Music/>}/>
                     <Route path={'/settings'} render={() => <Settings/>}/>
-                    <Route path={'/users'} render={() => <UsersContainer/>}/>
+                    <Route path={'/users'} render={() => <UsersContainer />}/>
                     <Route path={'/login'} render={() => {
                         return <React.Suspense fallback={<Preloader/>}>
                             <Login/>
