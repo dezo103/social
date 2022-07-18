@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import Paginator from "../common/Paginator/Paginator";
 import {User} from "./User";
 import {UsersType} from "../../types/types";
@@ -14,21 +14,30 @@ export type UsersPropsType = {
     followingInProgress: Array<number>
 }
 
-export const Users = (props: UsersPropsType) => {
+export const Users: FC<UsersPropsType> = ({
+                                                    users,
+                                                    follow,
+                                                    unfollow,
+                                                    totalUsersCount,
+                                                    pageSize,
+                                                    currentPage,
+                                                    onPageChanged,
+                                                    followingInProgress
+                                                }) => {
 
     return <div>
-        <Paginator totalItemsCount={props.totalUsersCount}
-                   pageSize={props.pageSize}
-                   currentPage={props.currentPage}
-                   onPageChanged={props.onPageChanged}
+        <Paginator totalItemsCount={totalUsersCount}
+                   pageSize={pageSize}
+                   currentPage={currentPage}
+                   onPageChanged={onPageChanged}
         />
 
-        {props.users.map(u => <User
+        {users.map(u => <User
             key={u.id}
-            user = {u}
-            follow = {props.follow}
-            unfollow = {props.unfollow}
-            followingInProgress = {props.followingInProgress}
+            user={u}
+            follow={follow}
+            unfollow={unfollow}
+            followingInProgress={followingInProgress}
         />)}
     </div>
 }
