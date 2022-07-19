@@ -1,6 +1,6 @@
-import {Dispatch} from 'redux';
-import {authAPI, secutityAPI} from '../API/api';
-import {stopSubmit} from 'redux-form';
+import {Dispatch} from 'redux'
+import {authAPI, ResultCodeForCaptcha, ResultCodesEnum, securityAPI} from '../API/api'
+import {stopSubmit} from 'redux-form'
 
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'samurai-network/auth/GET_CAPTCHA_URL_SUCCESS'
@@ -56,26 +56,25 @@ export const getCaptchaUrlSuccess = (captchaUrl: string): getCaptchaUrlSuccessAc
 })
 
 export const getAuthUserData = () => async (dispatch: Dispatch) => {
-    let response = await authAPI.me()
+    let meData = await authAPI.me()
 
-    if (response.data.resultCode === 0) {
-        // response code 1
-        let {id, email, login} = response.data.data
+    if (meData.resultCode === ResultCodesEnum.Success) {
+        let {id, email, login} = meData.data
         dispatch(setAuthUserData(id, email, login, true))
     }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: Dispatch<any>) => {
-    let response = await authAPI.login(email, password, rememberMe, captcha)
+    let data = await authAPI.login(email, password, rememberMe, captcha)
 
-    if (response.data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData())
     } else {
-        if (response.data.resultCode === 10) {
+        if (data.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
             dispatch(getCaptchaUrl())
         } else {
-            let message = response.data.messages.length > 0
-                ? response.data.messages[0]
+            let message = data.messages.length > 0
+                ? data.messages[0]
                 : 'Some error'
             dispatch(stopSubmit('login', {_error: message}))
         }
@@ -83,7 +82,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 }
 
 export const getCaptchaUrl = () => async (dispatch: Dispatch<any>) => {
-    const response = await secutityAPI.getCaptchaUrl()
+    const response = await securityAPI.getCaptchaUrl()
     const captchaUrl = response.data.url
     dispatch(getCaptchaUrlSuccess(captchaUrl))
 
